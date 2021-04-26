@@ -15,7 +15,20 @@ public class CourseManager {
 		
 		
 	}
-	
+	public void showCourses(Course[] courses) {
+		
+		for (Course course : courses) {
+			
+			System.out.println("-------Course Information--------");
+			System.out.println("Course Id : "+course.id);
+			System.out.println("Course Name : "+course.name);
+			System.out.println("Course Detail : "+course.detail);
+			System.out.println("Course Lecturer : "+course.lecturer);
+			System.out.println("---------------------------------");
+			
+		}
+		
+	}
 	
 
 }

@@ -21,33 +21,19 @@ public class Main {
 	Course[] courses = {course1,course2};
 	
 	//Student elements are printed to the screen from an array.
-	for (Student student : students) {
-		
-		System.out.println("---------Student Information----------");
-		System.out.println(" Student id : " + student.id);
-		System.out.println(" Student name : " +student.name);
-		System.out.println(" Student surname : " +student.surname);
-		System.out.println(" Student email : " +student.email);
-		System.out.println("--------------------------------------");
-	}
+	StudentManager studentManager= new StudentManager();
+	studentManager.showStudents(students);
+	
 	
 	//Course elements are printed to the screen from an array.
-	for (Course course : courses) {
-		
-		System.out.println("---------Course Information----------");
-		System.out.println(" Course id : " + course.id);
-		System.out.println(" Course name : " + course.name);
-		System.out.println(" Course lecturer : " + course.lecturer);
-		System.out.println(" Course detail : " + course.detail);
-		System.out.println("--------------------------------------");
-		
-	}
+	CourseManager courseManager = new CourseManager();
+	courseManager.showCourses(courses);
 	
 	//CourseManager objects created
-	CourseManager courseManager = new CourseManager();
+	CourseManager courseManager1 = new CourseManager();
 	
-	courseManager.applyCourse(course1);
-	courseManager.courseComplete(course2);
+	courseManager1.applyCourse(course1);
+	courseManager1.courseComplete(course2);
 		
 
 	}
