@@ -7,5 +7,5 @@ import com.example.hrms.entities.concretes.User;
 public interface UserService {
 	
 	List<User> getAll();
-
+	
 }

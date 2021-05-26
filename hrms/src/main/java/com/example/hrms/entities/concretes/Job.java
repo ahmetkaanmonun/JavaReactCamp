@@ -19,7 +19,7 @@ public class Job {
 	
 	
 	@Column(name = "job_title") 
-	private String job_title;
+	private String job;
 	
 	public Job() {
 		
@@ -28,10 +28,10 @@ public class Job {
 	}
 
 
-	public Job(int id, String job_title) {
+	public Job(int id, String job) {
 		super();
 		this.id = id;
-		this.job_title = job_title;
+		this.job = job;
 	}
 	
 	
