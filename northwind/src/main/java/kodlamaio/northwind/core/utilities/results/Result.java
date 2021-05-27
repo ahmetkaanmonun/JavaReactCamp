@@ -13,7 +13,7 @@ public class Result {
 	}
 	public Result(boolean success,String message) {
 		
-		this.success = success;
+		this(success);
 		this.message = message;
 		
 		
