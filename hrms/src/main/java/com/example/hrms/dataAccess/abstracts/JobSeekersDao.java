@@ -9,7 +9,7 @@ import com.example.hrms.entities.concretes.JobSeekers;
 
 public interface JobSeekersDao  extends JpaRepository<JobSeekers, Integer>{
 	
-	List<JobSeekers> findByEmailIs(String email);
+	List<JobSeekers> findByUser_EmailIs(String email);
 	List<JobSeekers> findByNationalityIdIs(String nationalityId);
 
 	

@@ -1,7 +1,11 @@
 package com.example.hrms.entities.concretes;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +19,22 @@ import lombok.NoArgsConstructor;
 @Table(name = "jobseekers")
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobSeekers extends User{
+public class JobSeekers{
+	
+	public JobSeekers(String firstName,String lastName,String nationalityId,String birthYear) {
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.nationalityId = nationalityId;
+		this.birthYear = birthYear;
+		
+		
+	}
+	
+	
+	@Id
+	@Column(name = "seekers_id")
+	private int seekersId;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -29,6 +48,12 @@ public class JobSeekers extends User{
 	@Column(name = "birth_year")
 	private String birthYear;
 	
+	
+	
+	@OneToOne(cascade=CascadeType.ALL)     
+	@JoinColumn(name="seekers_id",referencedColumnName = "id")     
+	private User user;
+
 	
 
 }

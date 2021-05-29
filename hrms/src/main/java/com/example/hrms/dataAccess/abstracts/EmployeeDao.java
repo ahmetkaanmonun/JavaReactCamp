@@ -8,6 +8,6 @@ import com.example.hrms.entities.concretes.Employee;
 
 public interface EmployeeDao extends JpaRepository<Employee, Integer>{
 	
-	List<Employee> findByEmailIs(String email);
+	//List<Employee> findByUser_EmailIs(String email);
 	
 }

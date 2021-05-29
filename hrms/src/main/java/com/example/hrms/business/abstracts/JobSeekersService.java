@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobSeekers;
+import com.example.hrms.entities.concretes.DTOs.JobSeekersForRegisterDto;
 
 public interface JobSeekersService {
 	
@@ -15,6 +16,6 @@ public interface JobSeekersService {
 	DataResult<Boolean> checkIfRealPerson(String nationalityId,String firstName,String lastName,String birthYear);
 	
 	
-	Result add(JobSeekers jobSeekers);
+	Result add(JobSeekersForRegisterDto jobSeekers);
 
 }

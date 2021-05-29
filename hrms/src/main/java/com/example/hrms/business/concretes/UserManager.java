@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.hrms.business.abstracts.UserService;
+import com.example.hrms.core.utilities.results.Result;
+import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.UserDao;
 import com.example.hrms.entities.concretes.User;
 
@@ -32,6 +34,17 @@ public class UserManager implements UserService{
 		
 		return this.userDao.findAll();
 	
+	}
+
+
+
+
+
+	@Override
+	public Result add(User user) {
+		
+		this.userDao.save(user);
+		return new SuccessResult();
 	}
 	
 	

@@ -8,7 +8,7 @@ import com.example.hrms.entities.concretes.Employer;
 
 public interface EmployerDao extends JpaRepository<Employer, Integer>{
 	
-	List<Employer> findByEmailIs(String email);
+	List<Employer> findByUser_EmailIs(String email);
 	
 
 }

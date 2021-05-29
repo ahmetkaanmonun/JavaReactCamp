@@ -13,6 +13,7 @@ import com.example.hrms.business.abstracts.EmployerService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.Employer;
+import com.example.hrms.entities.concretes.DTOs.EmployerForRegisterDto;
 
 public class EmployerController {
 	
@@ -23,6 +24,7 @@ public class EmployersController {
 
 	 private final EmployerService employerService;
 
+	 	@Autowired
 	    public EmployersController(EmployerService employerService) {
 	        this.employerService = employerService;
 	    }
@@ -38,7 +40,7 @@ public class EmployersController {
 	    }
 
 	    @PostMapping("/add")
-	    public Result add(@RequestBody Employer employer){
+	    public Result add(@RequestBody EmployerForRegisterDto employer){
 	        return this.employerService.add(employer);
 	    }
 	

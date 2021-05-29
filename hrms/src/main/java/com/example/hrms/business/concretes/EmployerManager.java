@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.hrms.business.abstracts.EmailService;
 import com.example.hrms.business.abstracts.EmployerService;
+import com.example.hrms.business.abstracts.UserService;
 import com.example.hrms.business.concretes.helpers.EmployeeCheckHelper;
 import com.example.hrms.business.concretes.helpers.EmployerCheckHelper;
 import com.example.hrms.core.utilities.results.DataResult;
@@ -17,6 +18,8 @@ import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.dataAccess.abstracts.EmployerDao;
 import com.example.hrms.entities.concretes.Employer;
 import com.example.hrms.entities.concretes.JobSeekers;
+import com.example.hrms.entities.concretes.User;
+import com.example.hrms.entities.concretes.DTOs.EmployerForRegisterDto;
 
 @Service
 
@@ -24,16 +27,18 @@ public class EmployerManager implements EmployerService{
 	
 	private EmployerDao employerDao;
 	private EmailService emailService;
+	private UserService userService;
 	
 	@Autowired
-    public EmployerManager(EmployerDao employerDao, EmailService emailService) {
+    public EmployerManager(EmployerDao employerDao, EmailService emailService,UserService userService) {
         this.employerDao = employerDao;
         this.emailService = emailService;
+        this.userService = userService;
     }
 	
 
 	@Override
-	public Result add(Employer employer) {
+	public Result add(EmployerForRegisterDto employer) {
 		
 		var checkEmail = this.findByEmailIs(employer.getEmail()).getData().size() != 0;
         var checkFields = !EmployerCheckHelper.allFieldsAreRequired(employer);
@@ -57,9 +62,12 @@ public class EmployerManager implements EmployerService{
 
             return new ErrorResult(errorMessage);
         }
-
-        this.employerDao.save(employer);
-        return new SuccessResult(this.emailService.sendEmail(employer).getMessage());
+        User user = new User(employer.getEmail(),employer.getPassword());
+        userService.add(user);
+        Employer employer1 = new Employer(user.getId(),employer.getCompanyName(),employer.getWebSite(),false);
+        
+        this.employerDao.save(employer1);
+        return new SuccessResult(this.emailService.sendEmail(user).getMessage());
 	}
 
 	@Override
@@ -71,7 +79,7 @@ public class EmployerManager implements EmployerService{
 	@Override
 	public DataResult<List<Employer>> findByEmailIs(String email) {
 		
-		return new SuccessDataResult<>(this.employerDao.findByEmailIs(email));
+		return new SuccessDataResult<>(this.employerDao.findByUser_EmailIs(email));
 	}
 
 	

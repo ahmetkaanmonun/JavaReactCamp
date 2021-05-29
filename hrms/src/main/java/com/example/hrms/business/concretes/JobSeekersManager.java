@@ -19,8 +19,10 @@ import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.core.utilities.services.UserCheckService;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
 import com.example.hrms.dataAccess.abstracts.JobSeekersDao;
+import com.example.hrms.entities.concretes.Employer;
 import com.example.hrms.entities.concretes.JobSeekers;
 import com.example.hrms.entities.concretes.User;
+import com.example.hrms.entities.concretes.DTOs.JobSeekersForRegisterDto;
 
 @Service
 public class JobSeekersManager implements JobSeekersService{
@@ -28,12 +30,14 @@ public class JobSeekersManager implements JobSeekersService{
 	 private final JobSeekersDao jobSeekersDao;
 	    private final UserCheckService userCheckService;
 	    private final EmailService emailService;
+	    private UserService userService;
 	    
 	    @Autowired
-	    public JobSeekersManager(JobSeekersDao jobSeekersDao, UserCheckService userCheckService, EmailService emailService) {
+	    public JobSeekersManager(JobSeekersDao jobSeekersDao, UserCheckService userCheckService, EmailService emailService,UserService userService) {
 	        this.jobSeekersDao = jobSeekersDao;
 	        this.userCheckService = userCheckService;
 	        this.emailService = emailService;
+	        this.userService = userService;
 	    }	    
 
 	@Override
@@ -45,7 +49,7 @@ public class JobSeekersManager implements JobSeekersService{
 	@Override
 	public DataResult<List<JobSeekers>> findByEmailIs(String email) {
 		
-		 return new SuccessDataResult<>(this.jobSeekersDao.findByEmailIs(email));
+		 return new SuccessDataResult<>(this.jobSeekersDao.findByUser_EmailIs(email));
 	}
 
 	@Override
@@ -62,7 +66,7 @@ public class JobSeekersManager implements JobSeekersService{
 	}
 
 	@Override
-	public Result add(JobSeekers jobSeekers) {
+	public Result add(JobSeekersForRegisterDto jobSeekers) {
 		
 		var checkEmail = this.findByEmailIs(jobSeekers.getEmail()).getData().size() != 0;
         var checkIdentityNumber = this.findByNationalityIdIs(jobSeekers.getNationalityId()).getData().size() != 0;
@@ -86,8 +90,12 @@ public class JobSeekersManager implements JobSeekersService{
             return new ErrorResult(errorMessage);
         }
 
-        this.jobSeekersDao.save(jobSeekers);
-        return new SuccessResult(this.emailService.sendEmail(jobSeekers).getMessage());
+        User user = new User(jobSeekers.getEmail(),jobSeekers.getPassword());
+        userService.add(user);
+        JobSeekers jobSeekers1 = new JobSeekers(jobSeekers.getFirstName(),jobSeekers.getLastName(),jobSeekers.getNationalityId(),jobSeekers.getBirthYear());
+        
+        this.jobSeekersDao.save(jobSeekers1);
+        return new SuccessResult(this.emailService.sendEmail(user).getMessage());
         
 	}
 	
