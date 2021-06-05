@@ -1,10 +1,14 @@
 package com.example.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -54,6 +58,7 @@ public class JobSeekers{
 	@JoinColumn(name="seekers_id",referencedColumnName = "id")     
 	private User user;
 
-	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "jobseekers")
+	private List<CurriculumVitae> curriculumVitae;
 
 }

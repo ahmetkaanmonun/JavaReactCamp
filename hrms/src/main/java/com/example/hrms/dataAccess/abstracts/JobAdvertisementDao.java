@@ -11,13 +11,13 @@ import com.example.hrms.entities.concretes.JobAdvertisement;
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer>{
 	
 	
-	@Query("From JobAdvertisement where isActive=:true")
+	@Query("From JobAdvertisement where isActive=true")
 	List<JobAdvertisement> getByIsActive();
 	
-	@Query("From JobAdvertisement where isActive=:true and postingDate=:postingDate")
+	@Query("From JobAdvertisement where isActive=true and postingDate=:postingDate")
 	List<JobAdvertisement> getByIsActiveAndPostingDate(String postingDate,Sort sort);
 	
-	@Query("From JobAdvertisement where isActive=:true and employerId=:employerId")
+	@Query("From JobAdvertisement where isActive=true and employerId=:employerId")
 	List<JobAdvertisement> getByIsActiveAndEmployerId(int employerId);
 	
 	

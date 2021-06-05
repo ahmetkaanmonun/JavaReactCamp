@@ -74,7 +74,7 @@ public class JobAdvertisementControllers {
 		
 		
 		
-		return this.JobAdvertisementService.add(jobAdvertisement);
+		return this.JobAdvertisementService.delete(jobAdvertisement);
 		
 	}
 	
