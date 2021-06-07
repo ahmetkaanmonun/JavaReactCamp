@@ -58,7 +58,7 @@ public class JobSeekers{
 	@JoinColumn(name="seekers_id",referencedColumnName = "id")     
 	private User user;
 
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "jobseekers")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "jobSeekers")
 	private List<CurriculumVitae> curriculumVitae;
 
 }

@@ -8,8 +8,8 @@ import com.example.hrms.entities.concretes.CurriculumVitae;
 
 public interface CurriculumVitaeDao extends JpaRepository<CurriculumVitae,Integer>{
 	
-	List<CurriculumVitae>getAll();
 	
-	List<CurriculumVitae>getByJobSeekersId(int jobseeker_id);
+	
+	List<CurriculumVitae>getByJobSeekersCurriculumVitae(int jobseeker_id);
 
 }

@@ -30,8 +30,8 @@ public class CurriculumVitae {
 	private int cvId;
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "jobseeker_id")
+	@ManyToOne(targetEntity = JobSeekers.class)
+    @JoinColumn(name = "jobseeker_id", referencedColumnName = "seekers_id")
 	private JobSeekers jobSeekers;
 	
 	@ManyToOne
@@ -39,7 +39,7 @@ public class CurriculumVitae {
 	private School school;
 	
 	@ManyToOne
-	@JoinColumn(name = "workspace_id")
+	@JoinColumn(name = "workplace_id")
 	private Workplace workplace;
 	
 	@ManyToOne

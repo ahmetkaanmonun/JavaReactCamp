@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.hrms.business.abstracts.CurriculumVitaeService;
 import com.example.hrms.core.utilities.results.DataResult;
@@ -13,6 +14,7 @@ import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.CurriculumVitaeDao;
 import com.example.hrms.entities.concretes.CurriculumVitae;
 
+@Service
 public class CurriculumVitaeManager implements CurriculumVitaeService{
 
 	private CurriculumVitaeDao curriculumVitaeDao;
@@ -31,9 +33,9 @@ public class CurriculumVitaeManager implements CurriculumVitaeService{
 	}
 
 	@Override
-	public DataResult<List<CurriculumVitae>> getByJobSeekersId(int jobseeker_id) {
+	public DataResult<List<CurriculumVitae>> getByJobSeekersCurriculumVitae(int jobseeker_id) {
 		
-		return new SuccessDataResult<List<CurriculumVitae>>(this.curriculumVitaeDao.getByJobSeekersId(jobseeker_id));
+		return new SuccessDataResult<List<CurriculumVitae>>(this.curriculumVitaeDao.getByJobSeekersCurriculumVitae(jobseeker_id));
 	}
 
 	@Override
